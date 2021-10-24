@@ -1,0 +1,15 @@
+{
+  "name": "true-crime-collective",
+  "version": "1.0.0",
+  "description": "True crime community collective",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "true",
+    "crime"
+  ],
+  "author": "Lily",
+  "license": "ISC"
+}
