@@ -6,13 +6,20 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
-//Body parser config
-// I want Express to convert the data I'm receiving into a JSON format:
+//Body parser config...
+
+// All forms of communication to API will be in form of data (key: value). Even if there is no UI yet, the data will be in JSON format. 
+
+// Tell Express to convert the body HTML into JSON...body parser is now part of Express so body-parser is not needed.
+
+// The code below is saying "I want Express to convert the data I'm receiving into a JSON format!"
 
 app.use(express.urlencoded())
 app.use(express.json())
 
 //url encoding will convert characters into respective codes. That way you don't miss characters. Data will come thru the HTTP request and you will use encoding to turn unicode to ASCII.
+
+// Express will encode the data and convert and send it as part of the request in users.js. In Post function, the body of the request will have data. The user submits data, Express will encode the data and send it to mongodb.
 
 
 //multi-threading is beautiful, let's write our first route
