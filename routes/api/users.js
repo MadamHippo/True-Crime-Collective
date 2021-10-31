@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const Keys = require('../../config/keys');
+const passport = require('passport');
 
 // query the database with the Users from model and see if there's a user in the database already created. In order to query the database, you need a model which is User = require('../../models/User)
 
@@ -127,10 +128,13 @@ router.post('/login', (req, res)=> {
 
             // jwt requires 2 things, payload and key. Go to config and set up a secret key as a parameter. Do not upload to github.
 
+            // .sign is a function
+
             jwt.sign(
               payload,
               Keys.secretOrKey,
               {expiresIn: 3600},
+              //whenever you generate a token, it should expire after some time. This is 1 hour, in terms of seconds.
               //callback:
               (err, token) => {
                 return res.json({token: 'Bearer ' + token})
@@ -140,6 +144,22 @@ router.post('/login', (req, res)=> {
     })
 })
 
+
+
+// THIRD API called Current. Purpose is to return the current user. Only private API require you to call the passport.
+// @route GET /api/users/current
+// @desc   Return current user info
+// @access Private
+
+router.get(
+  '/current',
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+    res.json(req.user);
+});
+
+
 module.exports = router;
 
 // all communications to Json should be in form of json
+

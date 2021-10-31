@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
+const passport = require('passport');
 
 //Body parser config...
 
@@ -22,6 +23,14 @@ app.use(express.json())
 // Express will encode the data and convert and send it as part of the request in users.js. In Post function, the body of the request will have data. The user submits data, Express will encode the data and send it to mongodb.
 
 
+
+//Passport config
+app.use(passport.initialize());
+// calling passport.js where most of the code is.
+require('./config/passport')(passport); // writing it in one-shot so I can call, and execute it in ONE line. calling it and executing it easily.
+
+
+//Writing our first route!
 //multi-threading is beautiful, let's write our first route
 //you have to say what request (got or post)
 //user came to the homepage and express will send a hello back
