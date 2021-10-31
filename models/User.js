@@ -38,6 +38,8 @@ const UserSchema = new Schema({
 });
 
 const User = mongoose.model('users', UserSchema);
+module.exports = User;
+
 // calling mongoose to create a model named users (actual name inside mongodb) using the schema above.
 
 

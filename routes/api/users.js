@@ -20,8 +20,8 @@ const passport = require('passport');
 // @desc Register a user
 // @access Public
 // (on every route, do this commenting practice for colleagues and team memebers)
-router.post('/register', (req, res) => {
 
+router.post('/register', (req, res) => {
   User.findOne({email: req.body.email})
     .then(user => {
       if (user){
