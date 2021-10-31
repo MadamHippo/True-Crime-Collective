@@ -6,7 +6,7 @@ const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const Keys = require('../../config/keys');
 const passport = require('passport');
-// const validateRegisterInput = require('../../validation/register');
+const validateRegisterInput = require('../../validation/register');
 
 
 // query the database with the Users from model and see if there's a user in the database already created. In order to query the database, you need a model which is User = require('../../models/User)
@@ -22,6 +22,15 @@ const passport = require('passport');
 // (on every route, do this commenting practice for colleagues and team memebers)
 
 router.post('/register', (req, res) => {
+
+  //Validation for user name and email....is moved to a separate sheet of code to not crowd this page.
+  // this function calls validation for register.js and output 400 error
+  const output = validateRegisterInput(req.body)
+  if (!output.isValid) {
+    return res.status(400).json(output.errors);
+  }
+
+
   User.findOne({email: req.body.email})
     .then(user => {
       if (user){
