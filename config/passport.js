@@ -13,10 +13,9 @@ const User = require('../models/User');
 
 // NPM doc guide: https://www.npmjs.com/package/passport-jwt
 
-const opts =  {};
-opts.jwtFormRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = keys.secertOrKey;
-
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = keys.secretOrKey;
 
 // exporting the passport!
 
@@ -42,5 +41,5 @@ module.exports = passport => {
       })
       .catch(err => console.log(err));
 
-  }))
+  }) )
 }

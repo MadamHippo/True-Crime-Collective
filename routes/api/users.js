@@ -6,6 +6,8 @@ const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const Keys = require('../../config/keys');
 const passport = require('passport');
+// const validateRegisterInput = require('../../validation/register');
+
 
 // query the database with the Users from model and see if there's a user in the database already created. In order to query the database, you need a model which is User = require('../../models/User)
 
@@ -19,18 +21,22 @@ const passport = require('passport');
 // @access Public
 // (on every route, do this commenting practice for colleagues and team memebers)
 router.post('/register', (req, res) => {
+
   User.findOne({email: req.body.email})
-//findOne means find at least 1 record to prevent the same users to register twice. This is how you perform a query. The condition to match is email 
-
-//.then and .catch are promise statements. .then does not mean anything was found. It only means the previous command either failed or completed successfuly. In this case, if your query was successful or not.
-
-// Therefore you have to write inside .then() to check if the user has an account yet or not. So return the response with a .json if that email already exists.
     .then(user => {
       if (user){
         return res.status(400).json({email: 'Email already exists!'});
         // 400 means bad data request, when you have an error, always add an error status to help client.
 
         // 200 means OK status, it's the default all good status.
+
+//findOne means find at least 1 record to prevent the same users to register twice. This is how you perform a query. The condition to match is email 
+
+//.then and .catch are promise statements. .then does not mean anything was found. It only means the previous command either failed or completed successfuly. In this case, if your query was successful or not.
+
+// Therefore you have to write inside .then() to check if the user has an account yet or not. So return the response with a .json if that email already exists.
+    
+      
       } else {
         // else = if user was NOT found in the databse, then we need to register this new user.
 
@@ -65,6 +71,7 @@ router.post('/register', (req, res) => {
           bcrypt.hash(req.body.password, salt, (err, hash) => {
             if (err) throw err;
             newUser.password = hash;
+
         
         //callbacks are parameters, promise statements are attached as then and catch.
 

@@ -39,7 +39,7 @@ const UserSchema = new Schema({
 
 const User = mongoose.model('users', UserSchema);
 // calling mongoose to create a model named users (actual name inside mongodb) using the schema above.
-module.exports = User;
+
 
 // naturally, it has to be exported to be used in another file
 
