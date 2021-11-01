@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const Keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 
 // query the database with the Users from model and see if there's a user in the database already created. In order to query the database, you need a model which is User = require('../../models/User)
@@ -104,13 +105,21 @@ router.post('/register', (req, res) => {
 });
 // if the users path works we will see Users work print!
 
-
+// LOGIN API:
 
 // @route GET /api/users/login
 // @desc LOGIN a user
 // @access Public
 
 router.post('/login', (req, res)=> {
+
+  //Validating login
+
+  const output = validateLoginInput(req.body)
+  if (!output.isValid) {
+    return res.status(400).json(output.errors);
+  }
+
   User.findOne({email: req.body.email})
     .then(user => {
       // another promise statement, this time, just .then
