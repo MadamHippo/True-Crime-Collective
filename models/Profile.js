@@ -12,6 +12,7 @@ const ProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     // the type of this column is then schema.types.objectId. The object that gets created is unique for each row so the user will refer to objectID in the collection below called 'users' [see ref]
     ref: 'users'
+    // this profile is tied to this user id, look it up at the user database table and users collection will show them not only the profile info but also user information from the users collection.
   },
   handle: {
     // handle is like username...ie twitter handle
@@ -39,10 +40,8 @@ const ProfileSchema = new Schema({
   bio: {
     type: String
   },
-
   // experience is an array of objects, so we can add as many entries.
-
-  fav_crime_cases: [{
+  cases: [{
     perp: {
       type: [String],
       required: true
@@ -76,7 +75,7 @@ const ProfileSchema = new Schema({
       type: String,
       required: true
     },
-    in_memory: {
+    eulogy: {
       type: String,
       required: true
     },
