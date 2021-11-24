@@ -47,6 +47,7 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
+      // submit button will call API when onSubmit is pressed (another function)
     };
 
     // Library name: Axios (sort of like Postman) - make a call from the React side to the Javascript side. It's another version of http client in Angular except Axios is easier.
