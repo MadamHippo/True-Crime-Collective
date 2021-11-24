@@ -7,6 +7,16 @@ class Register extends Component {
     //constructor automatically gets called first, it's the first function that gets called by App.js. Job of constructor is to allocate space for the component below (during construction)
     super(); 
     // Component = parent; Register = child;
+
+    // this is our component state, we can store whatever we want here! This will make sense why we have a state here when we get into Redux.
+    // What we will want to store in this is all the information coming in (names email etc.)
+    // In this component, we now bind a text box and BIND it together in the state.
+    // We bind in the HTML below under <form action>
+
+    // One way binding: create a variable called value and we bind it to the information it's asking for in the box (name, etc.) so we can read the data.
+
+    
+
     this.state = {
       name: '',
       email: '',
@@ -18,6 +28,10 @@ class Register extends Component {
     }
 
   }
+
+// Two way binding: adding onChange = {} where we add a function, onchange will get fired whenever a change is detected in the text box. Whenever a change happens, call this function onChange where you will get data. In this function you call the setState value. Using this function you will get the new text box's value.
+
+// You can test two way binding is working because you installed two Chrome extensions (use F12 key to open dev window). React dev tools plugin will show you routes and you can see the State. It's really good for debugging! You can watch live what's happening with the onChange function below.
 
   onChange(e){ // read the onChange value and write it into this.state
     this.setState({[e.target.name]: e.target.value });

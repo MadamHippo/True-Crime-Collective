@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+
+// Here we are now connecting UI to our API (fullstack dev time!):
 class Login extends Component {
   render() {
     return (
