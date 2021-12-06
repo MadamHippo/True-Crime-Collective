@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames'; // library, a function we will call to provide the default classnames and raise errors. Names are stored in setState section of code.
 
+import {connect} from 'react-redux';
+import {registerUser} from '../../actions/authActions';
+
+
+
+//Summary of what's going to happen here:
+// Calling API and putting data into the API in this entire section!
+// "State" or state information means data in this context, data in component etc. There's different ways to store states.
+// We're binding this data.
+// Component state: we're storing the data state of the component within the component itself. ie main middle page (login + auth)
+// Application state: data is stored in the entire application (navbar + footer)
+// Browser state: TBD
+
 class Register extends Component {
   constructor() {
     //constructor automatically gets called first, it's the first function that gets called by App.js. Job of constructor is to allocate space for the component below (during construction)
@@ -52,10 +65,13 @@ class Register extends Component {
 
     // Library name: Axios (sort of like Postman) - make a call from the React side to the Javascript side. It's another version of http client in Angular except Axios is easier.
 
-    axios
-    .post('/api/users/register', newUser)
-    .then(res => console.log(res.data))
-    .catch(err => this.setState({errors: err.response.data}));
+    this.props.registerUser(newUser);
+
+    // axios
+    // .post('/api/users/register', newUser)
+    // .then(res => console.log(res.data))
+    // .catch(err => this.setState({errors: err.response.data}));
+
     // we're calling our *own* API that we wrote before (see User.js!). If everything is successful our user data will be returned.
     //API will perform some validation and that's our full stack development!
   }
@@ -65,8 +81,20 @@ class Register extends Component {
   render() {
     const {errors} = this.state; //(before deconstruction: const errors = this.state.errors;)
     //noValidate turns off auto validate on the web side. We want to only validate using data from the API side because not all web browsers validate correctly.
+    const {user} = this.props.auth;
+
+    
+    
+  //noValidate turns off auto validate on the web side. We want to only validate using data from the API side because not all web browsers validate correctly.
+
+    //browsers actually have built in noValidate. We don't want browser doing that because they are NOT reliable. Not all browsers have it. You should turn off validation feature and use our API data.
+
     return (
+
       <div className="register">
+
+      {user? user.name : "no user"}
+
       <div className="container">
         <div className="row">
           <div className="col-md-8 m-auto">
@@ -154,4 +182,13 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStatetoProps = (state) => ({
+  auth: state.auth
+})
+  // we get all the data from state and this function lets us pick n' choose what exact data from state we want. In this one, we want auth.
+
+export default connect(mapStatetoProps, {registerUser}) (Register);
+//this component is connected to the Redux store
+// registerUser is the first to connect to the Redux store.
+
+

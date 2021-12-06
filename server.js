@@ -56,3 +56,5 @@ const port = 5001;
 app.listen(port, () => console.log(`Server is running on port ${port}`) );
 //you're asking Express to listen at the port for a callback
 //if successful you will have Express print on the screen server is running ...
+
+// we write code in server.js because it's a main common code.
