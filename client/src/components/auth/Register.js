@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames'; // library, a function we will call to provide the default classnames and raise errors. Names are stored in setState section of code.
-
 import {connect} from 'react-redux';
 import {registerUser} from '../../actions/authActions';
-
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 
 //Summary of what's going to happen here:
@@ -36,10 +36,7 @@ class Register extends Component {
       password: '',
       password2: '',
       // you can see this in the html below in the render section
-      errors: {}
-      // blank is represented in setState below in axios
     }
-
   }
 
 // Two way binding: adding onChange = {} where we add a function, onchange will get fired whenever a change is detected in the text box. Whenever a change happens, call this function onChange where you will get data. In this function you call the setState value. Using this function you will get the new text box's value.
@@ -65,12 +62,9 @@ class Register extends Component {
 
     // Library name: Axios (sort of like Postman) - make a call from the React side to the Javascript side. It's another version of http client in Angular except Axios is easier.
 
-    this.props.registerUser(newUser);
+    this.props.registerUser(newUser, this.props.history);
 
-    // axios
-    // .post('/api/users/register', newUser)
-    // .then(res => console.log(res.data))
-    // .catch(err => this.setState({errors: err.response.data}));
+    // axios use to be here but onSubmit in practice shouldn't have to work hard or lift a finger so we removed axios.
 
     // we're calling our *own* API that we wrote before (see User.js!). If everything is successful our user data will be returned.
     //API will perform some validation and that's our full stack development!
@@ -79,7 +73,7 @@ class Register extends Component {
 
   // render is the last function
   render() {
-    const {errors} = this.state; //(before deconstruction: const errors = this.state.errors;)
+    const {errors} = this.props; //(before deconstruction: const errors = this.state.errors;)
     //noValidate turns off auto validate on the web side. We want to only validate using data from the API side because not all web browsers validate correctly.
     const {user} = this.props.auth;
 
@@ -136,6 +130,11 @@ class Register extends Component {
                 onChange={this.onChange.bind(this)}/>
 
                 <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
+                  {
+                    <div className="invalid-feedback">
+                      {errors.email}
+                    </div>
+                  }               
               </div>
               <div className="form-group">
                 <input 
@@ -182,13 +181,25 @@ class Register extends Component {
   }
 }
 
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+}
+// register proptypes needs all these dependenies to come alive. Need all these actions.
+
 const mapStatetoProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 })
   // we get all the data from state and this function lets us pick n' choose what exact data from state we want. In this one, we want auth.
+  // basically it says...take this data from the state, write it to my local property of auth and we can write it on the page.
 
-export default connect(mapStatetoProps, {registerUser}) (Register);
+  // But "good" efficient and reliable pages made with React need to cover if something ever failed. If it fails, registering won't matter so in order to prepare for fails - we use "prop types" on the component that says unless these things are ready to ready, ready to go, don't load this component. Therefore this action becomes a dependency, actions are nothing but Javascript, it the action failed to load then don't show the component at all.
+
+export default connect(mapStatetoProps, {registerUser}) (withRouter(Register));
 //this component is connected to the Redux store
 // registerUser is the first to connect to the Redux store.
 
 
+// (withRouter(Register)) is moving the User away from the Register component (to go to Login page usually) We had to import withRouter for this.

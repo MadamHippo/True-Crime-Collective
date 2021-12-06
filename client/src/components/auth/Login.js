@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import classnames from 'classnames';
+import {connect} from 'react-redux';
+import {loginUser} from '../../actions/authActions';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 
 // Here we are now connecting UI to our API (fullstack dev time!):
@@ -11,8 +14,7 @@ class Login extends Component {
 
     this.state = {
       email: '',
-      password: '',
-      errors: {}
+      password: ''
     }
   }
 
@@ -26,15 +28,12 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-
-    axios
-      .post('/api/users/login', user)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({errors: err.response.data}));
+    
+    this.props.loginUser(user);
   }
 
   render() {
-    const {errors} = this.state;
+    const {errors} = this.props;
     // if errors in email, these things will show up on the UI side just like what we did in Register.js
     return (
       <div className="login">
@@ -81,7 +80,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+}
+
+const mapStatetoProps = (state) => ({
+  errors: state.errors
+})
+
+export default connect(mapStatetoProps, {loginUser}) (withRouter(Login));
 
 
 // Redux notes (from 2021 11 20):

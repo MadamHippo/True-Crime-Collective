@@ -9,6 +9,8 @@ const initialState = {
 
 // Look at redux.js for docs on how to create a Store using a function as follows: 
 // it's a function that we pass in a state.
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function(state=initialState, action){
   switch(action.type){
     case SET_USER:

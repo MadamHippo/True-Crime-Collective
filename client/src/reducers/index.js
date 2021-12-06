@@ -4,9 +4,12 @@
 
 import { combineReducers } from "redux";
 import authReducer from "./authReducer";
+import errorReducer from "./errorReducer";
+// bringing errorReducer in the index so it could exist elsewhere.
 
 export default combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  errors: errorReducer
 })
 
 
