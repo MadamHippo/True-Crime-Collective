@@ -32,6 +32,23 @@ class Login extends Component {
     this.props.loginUser(user);
   }
 
+
+  // Reads the properties from the store and write the properties into your component. So if you get new data (nextProps) this function will read it, and we will push the history of it to the Dashboard. Does the new data contain isAuth's new state? if so you need to react to that new data and you will send it to the Dashboard component. 
+
+  // we have Redux / Redux store because it's useful for keep refreshing itself even though it's already loaded on the stage. It can still react to new data - very good example is Gmail or Twitter. Somewhere on the page there needs to be a hookpoint to get the new data.
+
+  // What are hook points (terminology)? What does common stand for? What do you mean by lifecycle?
+
+  
+  // Additional step of coming back to login to check for data and then pushing User to dashboard
+  
+  componentWillReceiveProps(nextProps){
+    if(nextProps.auth.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
+  }
+
+
   render() {
     const {errors} = this.props;
     // if errors in email, these things will show up on the UI side just like what we did in Register.js
@@ -82,10 +99,13 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 }
 
 const mapStatetoProps = (state) => ({
+  auth: state.auth,
+  // We need the auth data for login, it contains the isAuthenticated flag of True/False
   errors: state.errors
 })
 

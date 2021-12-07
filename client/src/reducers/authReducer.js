@@ -1,4 +1,5 @@
 import { SET_USER } from "../actions/types";
+import isEmpty from "../validation/is-empty";
 
 // What data do I write into the store for others to use? Well we want to authenticate the user and then say hello to the user. If not we should send the user how to login. This authentication empty object needs to answer this. It's responsible for creating the initial State -
 const initialState = {
@@ -18,6 +19,9 @@ export default function(state=initialState, action){
           return{
             ...state,
               // return to state and make a copy of that data sent..then it will Pick apart that data...and write that data (set_user) into user:action.payload:
+
+              isAuthenticated: !isEmpty(action.payload),
+              // This is saying, if action payload is NOT empty then isAuth will return True (will turn on the initialState true)
 
         // In an uber example, set_user is like hey I want to go from seattle to redmond...and the state in this example is your pick up address.
         
