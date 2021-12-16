@@ -33,7 +33,8 @@ export const registerUser = (userData, history) => dispatch => {
 // if something failed with the API, we're going to use Get_Error dispatched and the payload will be the error message. We will write a second reducer that will listen for Get_errors and write the error information to the store so UI can also read the error AND  auth data both. 
 
 // Login action
-export const loginUser = userData => dispatch => {
+export const loginUser =  (userData, history) => dispatch => {
+  // dispatch inhereited the userData and history parameters of loginUser
   axios
   // make axios call and send a token, if successful, we will save the token somewhere and write it into the authorization header. (Like in Postman where there's a header section except now we want to do it automatically using code instead of manually like what we did before)
     .post('/api/users/login', userData)
@@ -79,4 +80,24 @@ export const loginUser = userData => dispatch => {
        type: GET_ERRORS,
        payload: err.response.data
      }));
+}
+
+
+
+//Log Out user: (no parameteres needed)...opposite of login. In login we saved token to storage, set token to authHeader, then set data into the Redux store. Now we do the opposite which is remove token from localstorage and auth header, then clean the redux store.
+// Redux requires action to always dispatch something. We can do multiple dispatch calls, so the idea is we can wrap the entire funciton in a dispatch call like with dispatch below.
+
+export const logoutUser = () => dispatch => {
+
+  //Remove token from localStorage
+  localStorage.removeItem('jwtToken');
+  // Remove token from auth header (calls will fail)
+  setAuthToken(false);
+  // see utils > setAuthToken for why we have it switched to false (if it's false it will trigger deletion.)
+  //Clean the redux store
+  dispatch({
+    type: SET_USER,
+    payload: {}
+  // See the reducer -> authReducer.js what why this cleans up the data from the redux store
+  });
 }

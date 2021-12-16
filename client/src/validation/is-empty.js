@@ -10,3 +10,5 @@ const isEmpty = value =>
 // React Javascript not plain old Javascript
 
 export default isEmpty;
+
+// modular export is Javascript's version
