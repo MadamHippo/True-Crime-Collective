@@ -11,4 +11,4 @@ I can upload a better quality one if needed, for some reason this video recordin
 
 -[Client-side-testing](https://youtu.be/pdHZL5q1AO0)
 
-Deployed to Heroku.
+-[Deployed to Heroku](https://agile-reef-44624.herokuapp.com/)
