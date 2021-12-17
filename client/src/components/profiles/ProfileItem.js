@@ -17,13 +17,13 @@ class ProfileItem extends Component {
             <h3>{profile.user.name}</h3>
             <p>
               {profile.status}{' '}
-              {isEmpty(profile.company) ? null : (
-                <span>at {profile.company}</span>
+              {isEmpty(profile.age) ? null : (
+                <span>at {profile.age}</span>
               )}
             </p>
             <p>
-              {isEmpty(profile.location) ? null : (
-                <span>{profile.location}</span>
+              {isEmpty(profile.education) ? null : (
+                <span>{profile.education}</span>
               )}
             </p>
             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
@@ -33,10 +33,10 @@ class ProfileItem extends Component {
           <div className="col-md-4 d-none d-md-block">
             <h4>Skill Set</h4>
             <ul className="list-group">
-              {profile.skills.slice(0, 4).map((skill, index) => (
+              {profile.hobbies.slice(0, 4).map((hobbies, index) => (
                 <li key={index} className="list-group-item">
                   <i className="fa fa-check pr-1" />
-                  {skill}
+                  {hobbies}
                 </li>
               ))}
             </ul>

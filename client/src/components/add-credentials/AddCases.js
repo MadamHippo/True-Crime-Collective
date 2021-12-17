@@ -6,17 +6,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addCases } from '../../actions/profileActions';
 
-class AddExperience extends Component {
+//Exp = cases.
+
+class AddCases extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      company: '',
-      title: '',
-      location: '',
+      perp: '',
+      victim: '',
+      about: '',
       from: '',
       to: '',
-      current: false,
-      description: '',
+      active_case: false,
+      theories: '',
       errors: {},
       disabled: false
     };
@@ -35,17 +37,17 @@ class AddExperience extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const expData = {
-      company: this.state.company,
-      title: this.state.title,
-      location: this.state.location,
+    const caseData = {
+      perp: this.state.perp,
+      victim: this.state.victim,
+      about: this.state.about,
       from: this.state.from,
       to: this.state.to,
-      current: this.state.current,
-      description: this.state.description
+      active_case: this.state.active_case,
+      theories: this.state.theories
     };
 
-    this.props.addCases(expData, this.props.history);
+    this.props.addCases(caseData, this.props.history);
   }
 
   onChange(e) {
@@ -55,7 +57,7 @@ class AddExperience extends Component {
   onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
-      current: !this.state.current
+      active_case: !this.state.active_case
     });
   }
 
@@ -63,39 +65,39 @@ class AddExperience extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="add-experience">
+      <div className="add-cases">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link>
-              <h1 className="display-4 text-center">Add Experience</h1>
+              <h1 className="display-4 text-center">Add Cases</h1>
               <p className="lead text-center">
-                Add any job or position that you have had in the past or current
+                Add your personal favorite or most impactful true crime case that you have heard of or is currently following.
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Company"
-                  name="company"
-                  value={this.state.company}
+                  placeholder="* Perps"
+                  name="perp"
+                  value={this.state.perp}
                   onChange={this.onChange}
-                  error={errors.company}
+                  error={errors.perp}
                 />
                 <TextFieldGroup
-                  placeholder="* Job Title"
-                  name="title"
-                  value={this.state.title}
+                  placeholder="* Victims"
+                  name="victim"
+                  value={this.state.victim}
                   onChange={this.onChange}
-                  error={errors.title}
+                  error={errors.victim}
                 />
                 <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
+                  placeholder="About"
+                  name="about"
+                  value={this.state.about}
                   onChange={this.onChange}
-                  error={errors.location}
+                  error={errors.about}
                 />
                 <h6>From Date</h6>
                 <TextFieldGroup
@@ -118,23 +120,23 @@ class AddExperience extends Component {
                   <input
                     type="checkbox"
                     className="form-check-input"
-                    name="current"
-                    value={this.state.current}
-                    checked={this.state.current}
+                    name="active_case"
+                    value={this.state.active_case}
+                    checked={this.state.active_case}
                     onChange={this.onCheck}
-                    id="current"
+                    id="active_case"
                   />
-                  <label htmlFor="current" className="form-check-label">
-                    Current Job
+                  <label htmlFor="active_case" className="form-check-label">
+                    Ongoing Case?
                   </label>
                 </div>
                 <TextAreaFieldGroup
-                  placeholder="Job Description"
-                  name="description"
-                  value={this.state.description}
+                  placeholder="Theories"
+                  name="theories"
+                  value={this.state.theories}
                   onChange={this.onChange}
-                  error={errors.description}
-                  info="Tell us about the the position"
+                  error={errors.theories}
+                  info="Tell us how this case ended or any on-going fan theories if it's unsolved."
                 />
                 <input
                   type="submit"
@@ -150,7 +152,7 @@ class AddExperience extends Component {
   }
 }
 
-AddExperience.propTypes = {
+AddCases.propTypes = {
   addCases: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
@@ -162,5 +164,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { addCases })(
-  withRouter(AddExperience)
+  withRouter(AddCases)
 );

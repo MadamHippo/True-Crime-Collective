@@ -63,9 +63,9 @@ export const createProfile = (profileData, history) => dispatch => {
 // *addCases/AddEexperience is an array of objects, so we can add as many entries.
 
 // Add Cases
-export const addCases = (expData, history) => dispatch => {
+export const addCases = (casesData, history) => dispatch => {
   axios
-    .post('/api/profile/cases', expData)
+    .post('/api/profile/cases', casesData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
@@ -77,9 +77,9 @@ export const addCases = (expData, history) => dispatch => {
 
 // Add memorial (edu)
 
-export const addMemorial = (eduData, history) => dispatch => {
+export const addMemorial = (memorialData, history) => dispatch => {
   axios
-    .post('/api/profile/memorial', eduData)
+    .post('/api/profile/memorial', memorialData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({

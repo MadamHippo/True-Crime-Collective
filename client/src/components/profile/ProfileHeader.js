@@ -22,17 +22,16 @@ class ProfileHeader extends Component {
               <h1 className="display-4 text-center">{profile.user.name}</h1>
               <p className="lead text-center">
                 {profile.status}{' '}
-                {isEmpty(profile.company) ? null : (
-                  <span>at {profile.company}</span>
+                {isEmpty(profile.age) ? null : (
+                  <span>at {profile.age}</span>
                 )}
               </p>
-              {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
+              {isEmpty(profile.education) ? null : <p>{profile.education}</p>}
               <p>
-                {isEmpty(profile.website) ? null : (
+                {isEmpty(profile.occupation) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.website}
-                    target="_blank"
+                    href="/feed"
                   >
                     <i className="fas fa-globe fa-2x" />
                   </a>

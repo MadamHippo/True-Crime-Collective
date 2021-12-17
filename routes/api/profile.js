@@ -14,7 +14,7 @@ const User = require("../../models/User");
 // Load Validation
 const validateProfileInput = require("../../validation/profile");
 const validateCasesInput = require("../../validation/cases");
-const validatMemorialInput = require("../../validation/memorial");
+const validateMemorialInput = require("../../validation/memorial");
 
 
 
@@ -273,7 +273,7 @@ router.post(
       };
 
       // Add to exp array
-      profile.education.unshift(newMemorial);
+      profile.memorial.unshift(newMemorial);
 
       profile.save().then((profile) => res.json(profile));
     });

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import classnames from 'classnames'; // library, a function we will call to provide the default classnames and raise errors. Names are stored in setState section of code.
 import {connect} from 'react-redux';
 import {registerUser} from '../../actions/authActions';

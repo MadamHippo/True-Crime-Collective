@@ -2,29 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import { deleteEducation } from '../../actions/profileActions';
+import { deleteMemorial } from '../../actions/profileActions';
 
-class Education extends Component {
+class Memorial extends Component {
   onDeleteClick(id) {
-    this.props.deleteEducation(id);
+    this.props.deleteMemorial(id);
   }
 
   render() {
-    const education = this.props.education.map(edu => (
-      <tr key={edu._id}>
-        <td>{edu.school}</td>
-        <td>{edu.degree}</td>
+    const memorial = this.props.memorial.map(memorial => (
+      <tr key={memorial._id}>
+        <td>{memorial.victim}</td>
+        <td>{memorial.eulogy}</td>
         <td>
-          <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
-          {edu.to === null ? (
+          <Moment format="YYYY/MM/DD">{memorial.from}</Moment> -
+          {memorial.to === null ? (
             ' Now'
           ) : (
-            <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+            <Moment format="YYYY/MM/DD">{memorial.to}</Moment>
           )}
         </td>
         <td>
           <button
-            onClick={this.onDeleteClick.bind(this, edu._id)}
+            onClick={this.onDeleteClick.bind(this, memorial._id)}
             className="btn btn-danger"
           >
             Delete
@@ -34,16 +34,16 @@ class Education extends Component {
     ));
     return (
       <div>
-        <h4 className="mb-4">Education Credentials</h4>
+        <h4 className="mb-4">Memorial</h4>
         <table className="table">
           <thead>
             <tr>
-              <th>School</th>
-              <th>Degree</th>
+              <th>Victim</th>
+              <th>Eulogy</th>
               <th>Years</th>
               <th />
             </tr>
-            {education}
+            {memorial}
           </thead>
         </table>
       </div>
@@ -51,8 +51,8 @@ class Education extends Component {
   }
 }
 
-Education.propTypes = {
-  deleteEducation: PropTypes.func.isRequired
+Memorial.propTypes = {
+  deleteMemorial: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteEducation })(Education);
+export default connect(null, { deleteMemorial })(Memorial);

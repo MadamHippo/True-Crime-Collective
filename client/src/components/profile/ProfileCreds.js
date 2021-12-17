@@ -3,60 +3,57 @@ import Moment from 'react-moment';
 
 class ProfileCreds extends Component {
   render() {
-    const { experience, education } = this.props;
+    const { cases, memorial } = this.props;
 
-    const expItems = experience.map(exp => (
-      <li key={exp._id} className="list-group-item">
-        <h4>{exp.company}</h4>
+    const casesItems = cases.map(cases => (
+      <li key={cases._id} className="list-group-item">
+        <h4>{cases.victims}</h4>
         <p>
-          <Moment format="YYYY/MM/DD">{exp.from}</Moment> -
-          {exp.to === null ? (
+          <Moment format="YYYY/MM/DD">{cases.from}</Moment> -
+          {cases.to === null ? (
             ' Now'
           ) : (
-            <Moment format="YYYY/MM/DD">{exp.to}</Moment>
+            <Moment format="YYYY/MM/DD">{cases.to}</Moment>
           )}
         </p>
         <p>
-          <strong>Position:</strong> {exp.title}
+          <strong>Perps:</strong> {cases.perp}
         </p>
         <p>
-          {exp.location === '' ? null : (
+          {cases.about === '' ? null : (
             <span>
-              <strong>Location: </strong> {exp.location}
+              <strong>About Case: </strong> {cases.about}
             </span>
           )}
         </p>
         <p>
-          {exp.description === '' ? null : (
+          {cases.living === '' ? null : (
             <span>
-              <strong>Description: </strong> {exp.description}
+              <strong>Case Theories + Conclusions: </strong> {cases.living}
             </span>
           )}
         </p>
       </li>
     ));
 
-    const eduItems = education.map(edu => (
-      <li key={edu._id} className="list-group-item">
-        <h4>{edu.school}</h4>
+    const memorialItems = memorial.map(memorial => (
+      <li key={memorial._id} className="list-group-item">
+        <h4>{memorial.victim}</h4>
         <p>
-          <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
-          {edu.to === null ? (
+          <Moment format="YYYY/MM/DD">{memorial.from}</Moment> -
+          {memorial.to === null ? (
             ' Now'
           ) : (
-            <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+            <Moment format="YYYY/MM/DD">{memorial.to}</Moment>
           )}
         </p>
         <p>
-          <strong>Degree:</strong> {edu.degree}
+          <strong>Field Of Study:</strong> {memorial.eulogy}
         </p>
         <p>
-          <strong>Field Of Study:</strong> {edu.fieldofstudy}
-        </p>
-        <p>
-          {edu.description === '' ? null : (
+          {memorial.living === '' ? null : (
             <span>
-              <strong>Description: </strong> {edu.description}
+              <strong>Living Memory: </strong> {memorial.living}
             </span>
           )}
         </p>
@@ -66,8 +63,8 @@ class ProfileCreds extends Component {
       <div className="row">
         <div className="col-md-6">
           <h3 className="text-center text-info">Experience</h3>
-          {expItems.length > 0 ? (
-            <ul className="list-group">{expItems}</ul>
+          {casesItems.length > 0 ? (
+            <ul className="list-group">{casesItems}</ul>
           ) : (
             <p className="text-center">No Experience Listed</p>
           )}
@@ -75,8 +72,8 @@ class ProfileCreds extends Component {
 
         <div className="col-md-6">
           <h3 className="text-center text-info">Education</h3>
-          {eduItems.length > 0 ? (
-            <ul className="list-group">{eduItems}</ul>
+          {memorialItems.length > 0 ? (
+            <ul className="list-group">{memorialItems}</ul>
           ) : (
             <p className="text-center">No Education Listed</p>
           )}

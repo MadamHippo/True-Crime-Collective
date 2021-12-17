@@ -18,7 +18,7 @@ class CreateProfile extends Component {
       age: '',
       occupation: '',
       education: '',
-      education: '',
+      location: '',
       hobbies: '',
       bio: '',
       twitter: '',
@@ -81,7 +81,7 @@ class CreateProfile extends Component {
         education: profile.education,
         location: profile.location,
         hobbies: hobbiesCSV,
-        githubusername: profile.githubusername,
+        // githubusername: profile.githubusername,
         bio: profile.bio,
         twitter: profile.twitter,
         facebook: profile.facebook,
@@ -102,7 +102,7 @@ class CreateProfile extends Component {
       education: this.state.education,
       location: this.state.location,
       hobbies: this.state.hobbies,
-      githubusername: this.state.githubusername,
+      // githubusername: this.state.githubusername,
       bio: this.state.bio,
       twitter: this.state.twitter,
       facebook: this.state.facebook,
@@ -229,34 +229,26 @@ class CreateProfile extends Component {
                   value={this.state.occupation}
                   onChange={this.onChange}
                   error={errors.occupation}
-                  info="Could be your own occupation or a age one"
+                  info="Occupation"
                 />
                 <TextFieldGroup
-                  placeholder="Location"
+                  placeholder="Education"
                   name="education"
                   value={this.state.education}
                   onChange={this.onChange}
                   error={errors.education}
-                  info="City or city & state suggested (eg. Boston, MA)"
+                  info="Major/Degree"
                 />
                 <TextFieldGroup
-                  placeholder="* Skills"
+                  placeholder="* hobbies"
                   name="hobbies"
                   value={this.state.hobbies}
                   onChange={this.onChange}
                   error={errors.hobbies}
                   info="Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP"
+                    Cooking,Writing,Singing)"
                 />
-                <TextFieldGroup
-                  placeholder="Github Username"
-                  name="githubusername"
-                  value={this.state.githubusername}
-                  onChange={this.onChange}
-                  error={errors.githubusername}
-                  info="If you want your latest repos and a Github link, include your username"
-                />
-                <TextAreaFieldGroup
+                 <TextAreaFieldGroup
                   placeholder="Short Bio"
                   name="bio"
                   value={this.state.bio}

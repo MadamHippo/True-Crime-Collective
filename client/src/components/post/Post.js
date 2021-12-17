@@ -1,32 +1,42 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import PostForm from './PostForm';
-import PostFeed from './PostFeed';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import PostItem from '../posts/PostItem';
+import CommentForm from './CommentForm';
+import CommentFeed from './CommentFeed';
 import Spinner from '../common/Spinner';
-import { getPosts } from '../../actions/postActions';
+import { getPost } from '../../actions/postActions';
 
-class Posts extends Component {
+class Post extends Component {
   componentDidMount() {
-    this.props.getPosts();
+    this.props.getPost(this.props.match.params.id);
   }
 
   render() {
-    const { posts, loading } = this.props.post;
+    const { post, loading } = this.props.post;
     let postContent;
 
-    if (posts === null || loading) {
+    if (post === null || loading || Object.keys(post).length === 0) {
       postContent = <Spinner />;
     } else {
-      postContent = <PostFeed posts={posts} />;
+      postContent = (
+        <div>
+          <PostItem post={post} showActions={false} />
+          <CommentForm postId={post._id} />
+          <CommentFeed postId={post._id} comments={post.comments} />
+        </div>
+      );
     }
 
     return (
-      <div className="feed">
+      <div className="post">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <PostForm />
+              <Link to="/feed" className="btn btn-light mb-3">
+                Back To Feed
+              </Link>
               {postContent}
             </div>
           </div>
@@ -36,8 +46,8 @@ class Posts extends Component {
   }
 }
 
-Posts.propTypes = {
-  getPosts: PropTypes.func.isRequired,
+Post.propTypes = {
+  getPost: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
 
@@ -45,4 +55,4 @@ const mapStateToProps = state => ({
   post: state.post
 });
 
-export default connect(mapStateToProps, { getPosts })(Posts);
+export default connect(mapStateToProps, { getPost })(Post);
