@@ -34,11 +34,17 @@ require('./config/passport')(passport); // writing it in one-shot so I can call,
 //multi-threading is beautiful, let's write our first route
 //you have to say what request (got or post)
 //user came to the homepage and express will send a hello back
-app.get('/', (req, res) => res.send('Hello World!'));
 
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
+
+if (process.env.NODE_ENV === 'production'){
+        app.use(express.static('client/build'));
+        app.get('*', (req, res) => {
+                res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        })
+}
 
 // .use means USE these javascript files. It's saying, hey Express (app) use these routes.
 
@@ -52,7 +58,7 @@ mongoose.connect(db.mongoURI)
 
 
 // now by this point, there are 2 threads running. That's why Server is running on port printed BEFORE Mongodb printed as connected.
-const port = 5001;
+const port = process.env.PORT || 5001;
 app.listen(port, () => console.log(`Server is running on port ${port}`) );
 //you're asking Express to listen at the port for a callback
 //if successful you will have Express print on the screen server is running ...
