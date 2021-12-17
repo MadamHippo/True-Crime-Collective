@@ -17,11 +17,11 @@ img {
 }
 
 .landing-inner {
-  padding-top: 80px;
+  padding-top: 150px;
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(14, 20, 73, 0.829);
   position: absolute;
   top: 0;
   left: 0;
@@ -40,4 +40,13 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+.narbar-brand {
+  font-size: 30em;
 }

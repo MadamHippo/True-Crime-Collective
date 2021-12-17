@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {logoutUser} from '../../actions/authActions';
+import logo from '../../img/Logo-Crime-Collective-PNG.png';
 
 
 //Navbar is a RCC component that's smart for users. It extends Comp from React. 
@@ -72,13 +73,19 @@ class Navbar extends Component {
 
 
     return (
+      
+
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <img src={logo} className="logo"></img>
         <div className="container">
-          <Link className="navbar-brand" to="/">True Crime Collective</Link>
+      
+          <Link className="navbar-brand" to="/">True Crime Collective</Link>  
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
             <span className="navbar-toggler-icon"></span>
+          
           </button>
 
+        
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
@@ -88,6 +95,7 @@ class Navbar extends Component {
             </ul>
 
             {isAuthenticated? authLinks : guestLinks}
+
 
           </div>
         </div>
