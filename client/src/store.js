@@ -9,13 +9,17 @@ import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 
 const middlware = [thunk];
-const store = createStore(
-                rootReducer, 
-                {},
-                compose( 
-                  applyMiddleware(...middlware),
-                    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-                ));
+
+
+
+// !! the following code is disabled because if a browser does not have redux_devtools installed it will show blank page.
+// const store = createStore(
+//               rootReducer, // list of all reducers
+//               {},
+//               compose(
+//                 applyMiddleware(...middleware),
+//                  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//               ));
 
                 // compose is applying multiple enchancements in the third parameter. You can combine multi enchancements together and you need to import it from Redux in the top of this page.
 
@@ -36,5 +40,14 @@ const store = createStore(
 // Application started when store got called, then store called root (index.js) which initalized the authReducer and the authReducer initialized the state. 
 
 // Store woke up authReducer and took the default data we wrote and wrote it into the store.
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+              rootReducer, // list of all reducers
+              {},
+              composeEnhancers(
+                applyMiddleware(...middleware)
+              ));
 
 export default store;
