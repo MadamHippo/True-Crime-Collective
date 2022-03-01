@@ -3,14 +3,13 @@
 // separating out store so this file doesn't crowd App.js
 
 import {createStore, applyMiddleware, compose} from 'redux';
-import rootReducer from './reducers';
+import rootReducer from './reducers'; // will refer to index.js file
+
 // index is a special name, it default picks up index.js file name but you can still specify it
 // we could have said authReducer instead of rootReducer but going through the index.js in the Reducers. Instead of having to add a new reducer, we can just create in the Reducer folder an index.js and refer to index.js so we can get all the Reducers together
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'; // breaking data into chunks
 
-const middlware = [thunk];
-
-
+const middleware = [thunk];
 
 // !! the following code is disabled because if a browser does not have redux_devtools installed it will show blank page.
 // const store = createStore(
