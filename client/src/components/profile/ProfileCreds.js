@@ -62,20 +62,20 @@ class ProfileCreds extends Component {
     return (
       <div className="row">
         <div className="col-md-6">
-          <h3 className="text-center text-info">Experience</h3>
+          <h3 className="text-center text-info">True Crime Cases</h3>
           {casesItems.length > 0 ? (
             <ul className="list-group">{casesItems}</ul>
           ) : (
-            <p className="text-center">No Experience Listed</p>
+            <p className="text-center">No Cases Listed</p>
           )}
         </div>
 
         <div className="col-md-6">
-          <h3 className="text-center text-info">Education</h3>
+          <h3 className="text-center text-info">Victim Memorial</h3>
           {memorialItems.length > 0 ? (
             <ul className="list-group">{memorialItems}</ul>
           ) : (
-            <p className="text-center">No Education Listed</p>
+            <p className="text-center">No Memorial Listed</p>
           )}
         </div>
       </div>
