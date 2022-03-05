@@ -48,12 +48,12 @@ class ProfileCreds extends Component {
           )}
         </p>
         <p>
-          <strong>Field Of Study:</strong> {memorial.eulogy}
+          <strong>Victim Eulogy:</strong> {memorial.eulogy}
         </p>
         <p>
           {memorial.living === '' ? null : (
             <span>
-              <strong>Living Memory: </strong> {memorial.living}
+              <strong>Light a Candle: </strong> {memorial.living}
             </span>
           )}
         </p>
@@ -71,7 +71,7 @@ class ProfileCreds extends Component {
         </div>
 
         <div className="col-md-6">
-          <h3 className="text-center text-info">Victim Memorial</h3>
+          <h3 className="text-center text-info">Victims Memorial</h3>
           {memorialItems.length > 0 ? (
             <ul className="list-group">{memorialItems}</ul>
           ) : (
